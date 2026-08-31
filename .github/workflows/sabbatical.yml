@@ -3,8 +3,6 @@ on:
   schedule:
     - cron: '0 8 * * *'
   workflow_dispatch:
-  push:
-    branches: [main]
 
 jobs:
   update:
@@ -37,7 +35,7 @@ jobs:
             FOOTER="🗓️ $DAYS_LEFT days remaining · $TARGET_FMT"
           fi
 
-          cat > sabbatical.svg << SVGEOF
+          cat > sabbatical.svg <<EOF
           <svg xmlns="http://www.w3.org/2000/svg" width="480" height="120">
             <style>
               .bg{fill:#161b22;rx:12}.track{fill:#21262d;rx:6}.bar{fill:url(#g);rx:6}
@@ -53,11 +51,11 @@ jobs:
             <rect class="bg" width="480" height="120"/>
             <text class="t" x="20" y="32">🏖️ Sabbatical Countdown</text>
             <rect class="track" x="20" y="48" width="440" height="24"/>
-            <rect class="bar" x="20" y="48" width="$BAR_W" height="24"/>
-            <text x="230" y="65" text-anchor="middle" fill="#e6edf3" font-weight="bold" font-size="12">$PCT%</text>
-            <text class="s" x="20" y="100">$FOOTER</text>
+            <rect class="bar" x="20" y="48" width="${BAR_W}" height="24"/>
+            <text x="230" y="65" text-anchor="middle" fill="#e6edf3" font-weight="bold" font-size="12">${PCT}%</text>
+            <text class="s" x="20" y="100">${FOOTER}</text>
           </svg>
-          SVGEOF
+          EOF
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
