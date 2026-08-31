@@ -47,4 +47,5 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git diff --quiet || (git add sabbatical.svg && git commit -m "🏖️ tick tock" && git push)
+          git add sabbatical.svg
+          git diff --cached --quiet || (git commit -m "🏖️ tick tock" && git push)
