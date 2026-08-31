@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="120">
+  <style>.bg{fill:#161b22;rx:12}.track{fill:#21262d;rx:6}.bar{fill:url(#g);rx:6}.t{fill:#e6edf3;font:bold 16px Segoe UI,sans-serif}.s{fill:#8b949e;font:13px Segoe UI,sans-serif}@keyframes grow{from{width:0}}.bar{animation:grow 1.5s ease-out}</style>
+  <defs><linearGradient id="g" x1="0%" x2="100%"><stop offset="0%" stop-color="#f97583"/><stop offset="50%" stop-color="#d2a8ff"/><stop offset="100%" stop-color="#79c0ff"/></linearGradient></defs>
+  <rect class="bg" width="480" height="120"/>
+  <text class="t" x="20" y="32">🏖️ Sabbatical Countdown</text>
+  <rect class="track" x="20" y="48" width="440" height="24"/>
+  <rect class="bar" x="20" y="48" width="198" height="24"/>
+  <text x="230" y="65" text-anchor="middle" fill="#e6edf3" font-weight="bold" font-size="12">45%</text>
+  <text class="s" x="20" y="100">🗓️ 598 days remaining · Apr 21, 2028</text>
+</svg>
