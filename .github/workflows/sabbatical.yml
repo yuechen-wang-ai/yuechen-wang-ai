@@ -12,10 +12,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Generate SVG
+        shell: bash
         run: |
           START="2025-04-21"
           END="2028-04-21"
-
           NOW=$(date +%s)
           S=$(date -d "$START" +%s)
           E=$(date -d "$END" +%s)
@@ -27,35 +27,22 @@ jobs:
           [ $PCT -lt 0 ] && PCT=0
           BAR_W=$(( 440 * PCT / 100 ))
           TARGET_FMT=$(date -d "$END" "+%b %-d, %Y")
-
           if [ $DAYS_LEFT -le 0 ]; then
             FOOTER="🎉 ON SABBATICAL — GONE FISHING 🍹🌴"
             PCT=100; BAR_W=440
           else
-            FOOTER="🗓️ $DAYS_LEFT days remaining · $TARGET_FMT"
+            FOOTER="🗓️ ${DAYS_LEFT} days remaining · ${TARGET_FMT}"
           fi
-
-          cat > sabbatical.svg <<EOF
-          <svg xmlns="http://www.w3.org/2000/svg" width="480" height="120">
-            <style>
-              .bg{fill:#161b22;rx:12}.track{fill:#21262d;rx:6}.bar{fill:url(#g);rx:6}
-              .t{fill:#e6edf3;font:bold 16px 'Segoe UI',sans-serif}
-              .s{fill:#8b949e;font:13px 'Segoe UI',sans-serif}
-              @keyframes grow{from{width:0}}.bar{animation:grow 1.5s ease-out}
-            </style>
-            <defs><linearGradient id="g" x1="0%" x2="100%">
-              <stop offset="0%" stop-color="#f97583"/>
-              <stop offset="50%" stop-color="#d2a8ff"/>
-              <stop offset="100%" stop-color="#79c0ff"/>
-            </linearGradient></defs>
+          printf '<svg xmlns="http://www.w3.org/2000/svg" width="480" height="120">
+            <style>.bg{fill:#161b22;rx:12}.track{fill:#21262d;rx:6}.bar{fill:url(#g);rx:6}.t{fill:#e6edf3;font:bold 16px Segoe UI,sans-serif}.s{fill:#8b949e;font:13px Segoe UI,sans-serif}@keyframes grow{from{width:0}}.bar{animation:grow 1.5s ease-out}</style>
+            <defs><linearGradient id="g" x1="0%%" x2="100%%"><stop offset="0%%" stop-color="#f97583"/><stop offset="50%%" stop-color="#d2a8ff"/><stop offset="100%%" stop-color="#79c0ff"/></linearGradient></defs>
             <rect class="bg" width="480" height="120"/>
             <text class="t" x="20" y="32">🏖️ Sabbatical Countdown</text>
             <rect class="track" x="20" y="48" width="440" height="24"/>
-            <rect class="bar" x="20" y="48" width="${BAR_W}" height="24"/>
-            <text x="230" y="65" text-anchor="middle" fill="#e6edf3" font-weight="bold" font-size="12">${PCT}%</text>
-            <text class="s" x="20" y="100">${FOOTER}</text>
-          </svg>
-          EOF
+            <rect class="bar" x="20" y="48" width="%d" height="24"/>
+            <text x="230" y="65" text-anchor="middle" fill="#e6edf3" font-weight="bold" font-size="12">%d%%</text>
+            <text class="s" x="20" y="100">%s</text>
+          </svg>' "$BAR_W" "$PCT" "$FOOTER" > sabbatical.svg
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
