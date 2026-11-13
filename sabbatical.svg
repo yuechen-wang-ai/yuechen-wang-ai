@@ -6,5 +6,5 @@
   <rect class="track" x="20" y="48" width="440" height="24"/>
   <rect class="bar" x="20" y="48" width="228" height="24"/>
   <text x="230" y="65" text-anchor="middle" fill="#e6edf3" font-weight="bold" font-size="12">52%</text>
-  <text class="s" x="20" y="100">🗓️ 525 days remaining · Apr 21, 2028</text>
+  <text class="s" x="20" y="100">🗓️ 524 days remaining · Apr 21, 2028</text>
 </svg>
